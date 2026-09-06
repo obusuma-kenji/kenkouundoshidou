@@ -1,0 +1,945 @@
+<title>試験直前チェックノート</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap');
+
+  :root{
+    --bg:#F4F6F3;
+    --surface:#FFFFFF;
+    --surface-2:#EDF1EC;
+    --ink:#1B2624;
+    --ink-muted:#56655F;
+    --ink-faint:#8A9A93;
+    --teal:#14746B;
+    --teal-soft:#E4EFEC;
+    --coral:#BD5B3F;
+    --coral-soft:#F5E7E1;
+    --border:#DCE3DD;
+    --shadow: 0 1px 2px rgba(27,38,36,.04), 0 8px 24px rgba(27,38,36,.05);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#111C19;
+      --surface:#17231F;
+      --surface-2:#1D2B26;
+      --ink:#EAF1EC;
+      --ink-muted:#9FB3AB;
+      --ink-faint:#6C8079;
+      --teal:#57C7B8;
+      --teal-soft:#1B3833;
+      --coral:#E28E70;
+      --coral-soft:#3A2621;
+      --border:#28372F;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#111C19;
+    --surface:#17231F;
+    --surface-2:#1D2B26;
+    --ink:#EAF1EC;
+    --ink-muted:#9FB3AB;
+    --ink-faint:#6C8079;
+    --teal:#57C7B8;
+    --teal-soft:#1B3833;
+    --coral:#E28E70;
+    --coral-soft:#3A2621;
+    --border:#28372F;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+    line-height:1.75;
+    font-size:15.5px;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--teal); color:#fff; }
+
+  h1,h2,h3,h4{
+    font-family:"Shippori Mincho",serif;
+    font-weight:700;
+    color:var(--ink);
+    text-wrap:balance;
+    margin:0;
+  }
+
+  a{ color:var(--teal); }
+  a:focus-visible, button:focus-visible, summary:focus-visible{
+    outline:2px solid var(--teal); outline-offset:2px; border-radius:4px;
+  }
+
+  /* ---------- shell layout ---------- */
+  .shell{
+    max-width:1180px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:248px minmax(0,1fr);
+    gap:0 48px;
+    padding:0 32px 96px;
+  }
+  @media (max-width:900px){
+    .shell{ grid-template-columns:1fr; padding:0 18px 72px; }
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead{
+    grid-column:1 / -1;
+    padding:56px 0 28px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .masthead .eyebrow{
+    font-size:12.5px;
+    letter-spacing:.14em;
+    color:var(--teal);
+    font-weight:700;
+  }
+  .masthead h1{
+    font-size:clamp(28px,4vw,42px);
+    line-height:1.25;
+  }
+  .masthead p{
+    margin:0;
+    max-width:62ch;
+    color:var(--ink-muted);
+    font-size:15px;
+  }
+  .masthead .domains{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:6px;
+  }
+  .masthead .domains span{
+    font-size:12px;
+    padding:5px 11px;
+    border-radius:999px;
+    background:var(--teal-soft);
+    color:var(--teal);
+    font-weight:700;
+  }
+
+  /* ---------- side nav (desktop) ---------- */
+  .toc{
+    position:sticky;
+    top:24px;
+    align-self:start;
+    padding:28px 0;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+    max-height:calc(100vh - 48px);
+    overflow-y:auto;
+  }
+  .toc a{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    padding:8px 10px;
+    border-radius:8px;
+    text-decoration:none;
+    color:var(--ink-muted);
+    font-size:13.5px;
+    font-weight:500;
+  }
+  .toc a:hover{ background:var(--surface-2); color:var(--ink); }
+  .toc a .num{
+    font-family:"Shippori Mincho",serif;
+    color:var(--teal);
+    font-size:12px;
+    font-variant-numeric:tabular-nums;
+    flex:none;
+    width:1.6em;
+  }
+  .toc-mobile{ display:none; }
+  @media (max-width:900px){
+    .toc{ display:none; }
+    .toc-mobile{
+      display:flex;
+      gap:8px;
+      overflow-x:auto;
+      position:sticky;
+      top:0;
+      background:var(--bg);
+      padding:12px 0;
+      border-bottom:1px solid var(--border);
+      z-index:5;
+      -webkit-overflow-scrolling:touch;
+    }
+    .toc-mobile a{
+      flex:none;
+      font-size:12.5px;
+      padding:7px 13px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--ink-muted);
+      text-decoration:none;
+      background:var(--surface);
+      white-space:nowrap;
+    }
+  }
+
+  /* ---------- main content ---------- */
+  main{ min-width:0; padding-top:8px; }
+
+  section.chapter{
+    padding:52px 0 20px;
+    border-bottom:1px solid var(--border);
+    scroll-margin-top:20px;
+  }
+  section.chapter:last-child{ border-bottom:none; }
+
+  .chapter-head{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    margin-bottom:6px;
+  }
+  .chapter-head .num{
+    font-family:"Shippori Mincho",serif;
+    font-size:15px;
+    color:var(--teal);
+    font-weight:700;
+    letter-spacing:.04em;
+  }
+  .chapter-head h2{ font-size:clamp(22px,3vw,28px); }
+  .chapter-lede{
+    color:var(--ink-muted);
+    font-size:14px;
+    margin:8px 0 32px;
+    max-width:68ch;
+  }
+
+  .topic{ margin:0 0 34px; }
+  .topic:last-child{ margin-bottom:0; }
+  .topic h3{
+    font-size:17px;
+    font-weight:600;
+    color:var(--ink);
+    margin-bottom:12px;
+    display:flex;
+    align-items:center;
+    gap:9px;
+  }
+  .topic h3::before{
+    content:"";
+    width:7px; height:7px;
+    border-radius:2px;
+    background:var(--coral);
+    flex:none;
+  }
+  .topic h4{
+    font-family:"Zen Kaku Gothic New",sans-serif;
+    font-size:13.5px;
+    font-weight:700;
+    color:var(--ink-muted);
+    margin:16px 0 8px;
+  }
+  .topic p{ margin:0 0 10px; color:var(--ink); }
+
+  ul.facts, ol.facts{
+    margin:0 0 10px;
+    padding-left:0;
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+  }
+  ul.facts li, ol.facts li{
+    padding-left:18px;
+    position:relative;
+    color:var(--ink);
+  }
+  ul.facts li::before{
+    content:"—";
+    position:absolute; left:0; top:0;
+    color:var(--ink-faint);
+  }
+  ol.facts{ counter-reset:step; }
+  ol.facts li{ padding-left:24px; }
+  ol.facts li::before{
+    counter-increment:step;
+    content:counter(step);
+    font-family:"Shippori Mincho",serif;
+    font-weight:700;
+    color:var(--teal);
+    position:absolute; left:0; top:-1px;
+    font-size:13px;
+  }
+  ul.facts b, ol.facts b{ color:var(--ink); }
+
+  strong.term{
+    color:var(--teal);
+    font-weight:700;
+  }
+
+  /* ---------- tables ---------- */
+  .table-wrap{
+    overflow-x:auto;
+    border:1px solid var(--border);
+    border-radius:12px;
+    margin:6px 0 18px;
+    background:var(--surface);
+    box-shadow:var(--shadow);
+  }
+  table{
+    border-collapse:collapse;
+    width:100%;
+    min-width:520px;
+    font-size:13.5px;
+  }
+  table caption{
+    text-align:left;
+    padding:12px 16px 0;
+    font-size:12px;
+    color:var(--ink-faint);
+  }
+  th,td{
+    padding:10px 14px;
+    text-align:left;
+    border-bottom:1px solid var(--border);
+    vertical-align:top;
+  }
+  thead th{
+    background:var(--surface-2);
+    color:var(--ink-muted);
+    font-weight:700;
+    font-size:12px;
+    letter-spacing:.03em;
+    white-space:nowrap;
+  }
+  tbody tr:last-child td{ border-bottom:none; }
+  tbody tr:hover{ background:var(--surface-2); }
+  td.num, th.num{ font-variant-numeric:tabular-nums; }
+  td strong{ color:var(--teal); }
+
+  /* ---------- callouts ---------- */
+  .tip{
+    display:flex;
+    gap:12px;
+    padding:14px 16px;
+    border-radius:12px;
+    background:var(--coral-soft);
+    border:1px solid color-mix(in srgb, var(--coral) 30%, transparent);
+    margin:10px 0 18px;
+  }
+  .tip .mark{
+    font-family:"Shippori Mincho",serif;
+    font-weight:800;
+    color:var(--coral);
+    flex:none;
+    font-size:13px;
+    padding-top:1px;
+  }
+  .tip p{ margin:0; color:var(--ink); font-size:14px; }
+  .tip p + p{ margin-top:6px; }
+
+  .note{
+    display:flex;
+    gap:12px;
+    padding:14px 16px;
+    border-radius:12px;
+    background:var(--teal-soft);
+    border:1px solid color-mix(in srgb, var(--teal) 25%, transparent);
+    margin:10px 0 18px;
+  }
+  .note .mark{
+    font-family:"Shippori Mincho",serif;
+    font-weight:800;
+    color:var(--teal);
+    flex:none;
+    font-size:13px;
+    padding-top:1px;
+  }
+  .note p{ margin:0; color:var(--ink); font-size:14px; }
+
+  /* ---------- compare grid ---------- */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:12px;
+    margin:6px 0 18px;
+  }
+  .card{
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:16px;
+    background:var(--surface);
+    box-shadow:var(--shadow);
+  }
+  .card h5{
+    margin:0 0 8px;
+    font-family:"Shippori Mincho",serif;
+    font-size:15px;
+    color:var(--ink);
+  }
+  .card p{ margin:0 0 6px; font-size:13px; color:var(--ink-muted); }
+  .card p b{ color:var(--ink); }
+
+  /* ---------- footer ---------- */
+  footer{
+    grid-column:1 / -1;
+    padding:36px 0 0;
+    color:var(--ink-faint);
+    font-size:12.5px;
+    border-top:1px solid var(--border);
+    margin-top:24px;
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    .toc a, a{ transition:background-color .15s ease, color .15s ease; }
+  }
+</style>
+
+<div class="shell">
+  <header class="masthead">
+    <span class="eyebrow">健康運動指導士 — 本試験直前レビュー</span>
+    <h1>試験直前チェックノート</h1>
+    <p>これまでの質疑で扱った論点を、出題5分野に沿って再構成した一覧です。太字の用語・表・「試験ポイント」だけを追えば、短時間で知識の抜けを確認できます。</p>
+    <div class="domains">
+      <span>運動生理学</span>
+      <span>機能解剖学</span>
+      <span>体力測定</span>
+      <span>安全管理・救急</span>
+      <span>生活習慣病</span>
+      <span>行動科学</span>
+      <span>スポーツ栄養</span>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="目次">
+    <a href="#physio"><span class="num">01</span>運動生理学</a>
+    <a href="#anatomy"><span class="num">02</span>機能解剖学</a>
+    <a href="#fitness-test"><span class="num">03</span>体力・体組成測定</a>
+    <a href="#emergency"><span class="num">04</span>安全管理・救急処置</a>
+    <a href="#lifestyle"><span class="num">05</span>生活習慣病と運動処方</a>
+    <a href="#behavior"><span class="num">06</span>行動科学・心理学</a>
+    <a href="#nutrition"><span class="num">07</span>スポーツ栄養学</a>
+  </nav>
+
+  <nav class="toc-mobile" aria-label="目次（モバイル）">
+    <a href="#physio">01 運動生理学</a>
+    <a href="#anatomy">02 機能解剖学</a>
+    <a href="#fitness-test">03 体力測定</a>
+    <a href="#emergency">04 安全管理</a>
+    <a href="#lifestyle">05 生活習慣病</a>
+    <a href="#behavior">06 行動科学</a>
+    <a href="#nutrition">07 栄養学</a>
+  </nav>
+
+  <main>
+
+    <!-- 01 運動生理学 -->
+    <section class="chapter" id="physio">
+      <div class="chapter-head"><span class="num">01</span><h2>運動生理学</h2></div>
+      <p class="chapter-lede">運動強度の測り方、心拍の異常、クールダウンの意味、そして混同しやすい「圧」の整理。</p>
+
+      <div class="topic">
+        <h3>運動強度指数（5種）</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>指標</th><th>考え方</th><th>使う場面</th></tr></thead>
+            <tbody>
+              <tr><td><strong>METs</strong></td><td>安静時を1とした絶対的強度。消費エネルギー(kcal)＝METs×体重(kg)×時間(h)</td><td>消費カロリー計算、運動量の絶対評価</td></tr>
+              <tr><td><strong>%VO₂max</strong></td><td>最大酸素摂取量に対する割合</td><td>負荷試験後の強度処方（低強度域でズレやすい）</td></tr>
+              <tr><td><strong>%VO₂R</strong></td><td>VO₂R＝VO₂max−VO₂rest（安静時VO₂＝3.5mL/kg/min＝1MET）を使う割合。％HRRとほぼ一致</td><td>VO₂ベースで最も正確な強度設定</td></tr>
+              <tr><td><strong>%HRmax</strong></td><td>HRmax＝220−年齢 に対する割合</td><td>簡便。β遮断薬服用者には不向き</td></tr>
+              <tr><td><strong>%HRR（カルボーネン法）</strong></td><td>HRR＝HRmax−安静時心拍（Reserve＝予備能）。目標心拍＝HRR×強度%＋安静時心拍</td><td>個人差を反映する最も正確な心拍法</td></tr>
+              <tr><td><strong>RPE</strong></td><td>ボルグスケール（6〜20）による主観的強度</td><td>心拍・薬の影響を受けない人（高齢者、β遮断薬服用者）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tip">
+          <span class="mark">試験ポイント</span>
+          <p>「R」は Reserve（予備能）の意味。％HRRと％VO₂Rはどちらも「最大値−安静値」を基準にする点が共通で、生理学的にほぼ一致する。</p>
+        </div>
+        <p><b>100kcal消費に必要な時間（体重60kg換算）</b>＝100÷METs。テニス(4METs)25分、ジョギング(5METs)20分、エアロビクス(3.3METs)約30分、ボーリング(2.5METs)40分。</p>
+      </div>
+
+      <div class="topic">
+        <h3>頻脈・徐脈</h3>
+        <ul class="facts">
+          <li><b>頻脈（tachycardia）</b>：安静時心拍数100/分以上。発熱・脱水・貧血・甲状腺機能亢進・不整脈などが原因。</li>
+          <li><b>徐脈（bradycardia）</b>：安静時心拍数60/分未満。アスリート心（生理的）、β遮断薬、洞不全症候群、房室ブロック（病的）などが原因。</li>
+        </ul>
+      </div>
+
+      <div class="topic">
+        <h3>β遮断薬服用者と運動強度指標</h3>
+        <ul class="facts">
+          <li><b>服薬した状態</b>で運動負荷試験を実施 → 薬で抑えられた心拍反応を含めてHRmaxが測定される → <b>％HRmax・％HRR・％VO₂max・％VO₂R・RPE すべて使用可能</b>。</li>
+          <li><b>服薬していない状態</b>で負荷試験 → 実運動時より心拍が高く出て強度設定が過大になる危険 → 心拍系の指標は使用不可、<b>RPEを用いる</b>。</li>
+        </ul>
+      </div>
+
+      <div class="topic">
+        <h3>クールダウンの生理学</h3>
+        <ul class="facts">
+          <li><b>静脈還流</b>＝血液が心臓へ戻る流れそのもの（現象）。促進要因は筋ポンプ作用・呼吸ポンプ作用・静脈弁・自律神経・体位の総合。</li>
+          <li><b>筋ポンプ作用</b>＝骨格筋の収縮弛緩が静脈を圧迫し血液を心臓へ押し戻すメカニズム（静脈還流を助ける要因の一つで、両者は同義ではない）。</li>
+          <li>急に運動を止める→筋ポンプ低下→下肢に<b>血液プーリング</b>→静脈還流↓→心拍出量↓→脳血流↓→めまい・失神。クールダウンはこれを防ぐ。</li>
+          <li>乳酸は完全休息より<b>軽運動を継続した方が除去が速い</b>（血流維持による再利用促進）。</li>
+        </ul>
+      </div>
+
+      <div class="topic">
+        <h3>「圧」の整理（方向で分類）</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>分類</th><th>向き</th><th>代表例</th></tr></thead>
+            <tbody>
+              <tr><td><strong>外圧</strong></td><td>外→内</td><td>気圧、分圧（酸素分圧・二酸化炭素分圧）</td></tr>
+              <tr><td><strong>内圧</strong></td><td>内→外</td><td>腫脹による内圧、胸腔内圧、腹腔内圧、筋内圧</td></tr>
+              <tr><td><strong>血管内圧</strong></td><td>血液→血管壁</td><td>血圧、静脈圧</td></tr>
+              <tr><td><strong>組織圧</strong></td><td>区画内部</td><td>コンパートメント内圧</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>「圧」は常に<b>何かが何かを押す力の対比</b>。場所と向きが違うだけで概念は同じ。</p>
+      </div>
+    </section>
+
+    <!-- 02 機能解剖学 -->
+    <section class="chapter" id="anatomy">
+      <div class="chapter-head"><span class="num">02</span><h2>機能解剖学・バイオメカニクス</h2></div>
+      <p class="chapter-lede">関節運動の対語、4関節の周囲筋群、筋と腱の構造的な違い。</p>
+
+      <div class="topic">
+        <h3>関節運動の基本対語</h3>
+        <ul class="facts">
+          <li><b>屈曲 ⇔ 伸展</b>／<b>外転 ⇔ 内転</b>／<b>内旋 ⇔ 外旋</b>／<b>内反 ⇔ 外反</b></li>
+          <li><b>底屈（つま先を下げる）⇔ 背屈（つま先を上げる）</b>　※「底曲」という語は存在しない。足関節はこの2語のみで定義される。</li>
+        </ul>
+      </div>
+
+      <div class="topic">
+        <h3>関節周囲筋群（周囲筋群＝筋の名前だけの集合）</h3>
+        <div class="grid">
+          <div class="card">
+            <h5>股関節</h5>
+            <p><b>屈曲</b>：腸腰筋・大腿直筋・縫工筋・TFL</p>
+            <p><b>伸展</b>：大殿筋・ハムストリングス</p>
+            <p><b>外転</b>：中殿筋・小殿筋・TFL</p>
+            <p><b>内転</b>：長内転筋・短内転筋・大内転筋・恥骨筋・薄筋</p>
+            <p><b>外旋</b>：外旋六筋（梨状筋ほか）</p>
+          </div>
+          <div class="card">
+            <h5>膝関節</h5>
+            <p><b>伸展</b>：大腿四頭筋（大腿直筋・内側/外側/中間広筋）</p>
+            <p><b>屈曲</b>：ハムストリングス・腓腹筋・縫工筋・薄筋</p>
+            <p><b>安定化</b>：内側広筋(VMO)・外側広筋・腸脛靭帯</p>
+          </div>
+          <div class="card">
+            <h5>足関節</h5>
+            <p><b>底屈</b>：下腿三頭筋・後脛骨筋・長母趾/趾屈筋・長短腓骨筋</p>
+            <p><b>背屈</b>：前脛骨筋・長趾伸筋・長母趾伸筋</p>
+            <p><b>内反</b>：前脛骨筋・後脛骨筋　<b>外反</b>：長短腓骨筋</p>
+          </div>
+          <div class="card">
+            <h5>肩関節</h5>
+            <p><b>屈曲</b>：三角筋前部・大胸筋上部</p>
+            <p><b>伸展</b>：三角筋後部・広背筋・大円筋</p>
+            <p><b>外転</b>：三角筋中部・棘上筋</p>
+            <p><b>ローテーターカフ</b>：棘上筋・棘下筋・小円筋・肩甲下筋</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic">
+        <h3>筋と腱の構造</h3>
+        <p>筋腹（力を生む）→ 腱（力を伝えるロープ、筋の一部）→ 骨（付着部）→ 関節（運動が起こる場所）。<b>腱は筋の一部であり、周囲筋群の分類には含まれない</b>。</p>
+        <div class="note">
+          <span class="mark">アキレス腱だけ固有名がある理由</span>
+          <p>人体最大・最強の腱（下腿三頭筋の総腱、踵骨に付着）／スポーツ外傷で断裂が非常に多く臨床的に重要／ギリシャ神話のアキレスに由来する歴史的背景。他の腱は「筋名＋腱」で呼べば十分だが、アキレス腱のみ特別扱いされる。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 体力・体組成測定 -->
+    <section class="chapter" id="fitness-test">
+      <div class="chapter-head"><span class="num">03</span><h2>体力・体組成測定</h2></div>
+      <p class="chapter-lede">体力年齢の作り方、体脂肪測定法6方式、骨密度のDEXA法。</p>
+
+      <div class="topic">
+        <h3>体力年齢の考え方</h3>
+        <p><b>運動習慣があり疾患のない健常集団</b>のデータを年齢ごとに集め、その集団の平均体力測定値が暦年齢と一致するように回帰式を作成している。病気の人や運動不足の人を基準にすると指標全体が歪むため使わない。</p>
+      </div>
+
+      <div class="topic">
+        <h3>体脂肪測定法（6方式の比較）</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>方式</th><th>原理</th><th>特徴</th></tr></thead>
+            <tbody>
+              <tr><td><strong>水中体重秤量法</strong></td><td>水中体重からアルキメデスの原理で体積→体密度を算出</td><td>ゴールドスタンダード。精度最高だが大掛かり</td></tr>
+              <tr><td><strong>空気置換法（ADP）</strong></td><td>密閉チャンバー内の空気変化から体積を測定</td><td>水中体重法に近い精度。高齢者にも実施可</td></tr>
+              <tr><td><strong>BI法</strong></td><td>微弱電流の抵抗から体水分量を推定</td><td>簡便・安価だが水分状態に影響されやすい</td></tr>
+              <tr><td><strong>キャリパー法</strong></td><td>皮下脂肪厚を測定し回帰式で推定</td><td>安価・簡便。測定者の技術差が大きい</td></tr>
+              <tr><td><strong>重水希釈法</strong></td><td>重水(D₂O)の希釈度から体水分量を算出</td><td>精度高いが研究用。実務ではほぼ使わない</td></tr>
+              <tr><td><strong>超音波法</strong></td><td>超音波で皮下脂肪厚を測定</td><td>非侵襲で高齢者にも安全。キャリパーより再現性が高い</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="topic">
+        <h3>DEXA法（骨密度・体組成）</h3>
+        <ul class="facts">
+          <li>2種類のエネルギーのX線を照射し、骨と軟部組織の<b>吸収率の差</b>から骨塩量・骨密度(BMD)を測定。骨粗鬆症診断の世界標準。</li>
+          <li>測定部位：<b>腰椎(L1〜L4)</b>と<b>大腿骨近位部</b>。精度が高く被曝量も少ない。</li>
+          <li>判定：<b>Tスコア</b>（−1.0以上正常／−1.0〜−2.5骨量減少／−2.5以下骨粗鬆症）、<b>YAM値</b>（80%以上正常／70〜79%骨量減少／70%未満骨粗鬆症）。</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 04 安全管理・救急処置 -->
+    <section class="chapter" id="emergency">
+      <div class="chapter-head"><span class="num">04</span><h2>安全管理・救急処置</h2></div>
+      <p class="chapter-lede">腫脹がなぜ危険か、固定具の使い分け、脱臼系の外傷の見分け方、ショックの二段構え。</p>
+
+      <div class="topic">
+        <h3>腫脹はなぜ怖いか／RICE処置</h3>
+        <ol class="facts">
+          <li>出血・滲出液で腫脹→<b>組織内圧が上昇</b>→毛細血管が圧迫される</li>
+          <li>血流低下（虚血）→細胞が酸欠→<b>二次的な組織損傷</b></li>
+          <li>内圧上昇は痛覚受容器も圧迫し痛みが増す→筋の防御性収縮→血流がさらに悪化（悪循環）</li>
+          <li>関節周囲の可動域が低下し、リハビリが遅れる</li>
+          <li>最重度では<b>コンパートメント症候群</b>（筋区画内圧の異常上昇→血流遮断→神経・筋の壊死→緊急手術）</li>
+        </ol>
+        <p><b>Rest・Ice・Compression・Elevation</b> はいずれも内圧上昇を抑え、二次損傷を防ぐための科学的処置。</p>
+      </div>
+
+      <div class="topic">
+        <h3>副子（ふくし）</h3>
+        <p>骨折・捻挫の患部を固定する、<b>取り外し可能</b>な固定材（英語のシーネ＝splintとほぼ同義）。ギプスは硬化・完全固定である点が異なる。</p>
+        <ul class="facts">
+          <li>金属副子（アルミ製、指・手首）／プラスチック副子（軽量、小児向き）</li>
+          <li>ギプス副子＝腫れが強い初期に使用／サーモプラスチック副子＝加熱成形でオーダーメイド</li>
+        </ul>
+      </div>
+
+      <div class="topic">
+        <h3>脱臼・亜脱臼・捻挫の違い</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>状態</th><th>関節面の位置関係</th><th>代表例／注意点</th></tr></thead>
+            <tbody>
+              <tr><td><strong>脱臼</strong></td><td>完全に外れる（接触ゼロ）</td><td>整復必須。神経・血管損傷のリスクが高い</td></tr>
+              <tr><td><strong>亜脱臼</strong></td><td>部分的にずれる（接触は残る＝不完全脱臼）</td><td>小児の肘内障が代表。不安定性が残りやすい</td></tr>
+              <tr><td><strong>捻挫</strong></td><td>関節面は正常位置のまま</td><td>靭帯（伸び・部分/完全断裂）の損傷</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="topic">
+        <h3>一次性ショックと二次性ショック</h3>
+        <ul class="facts">
+          <li><b>一次性ショック</b>＝原因そのものによるショック（出血、心筋梗塞、アナフィラキシー、敗血症）。原因を除けば改善しうる。</li>
+          <li><b>二次性ショック</b>＝一次ショックの<b>結果（合併症）</b>がさらに悪化させる状態（酸欠・乳酸蓄積・代謝性アシドーシス・多臓器不全）。悪循環に入ると致死率が急上昇。</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 05 生活習慣病 -->
+    <section class="chapter" id="lifestyle">
+      <div class="chapter-head"><span class="num">05</span><h2>生活習慣病と運動処方</h2></div>
+      <p class="chapter-lede">肥満基準、4大疾患の薬と運動の注意点、変形性関節症、ロコモ・サルコペニア・メタボ・フレイル。</p>
+
+      <div class="topic">
+        <h3>日本肥満学会の肥満基準</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>BMI</th><th>判定</th></tr></thead>
+            <tbody>
+              <tr><td class="num">18.5未満</td><td>低体重</td></tr>
+              <tr><td class="num">18.5〜25未満</td><td>普通体重</td></tr>
+              <tr><td class="num">25〜30未満</td><td>肥満1度</td></tr>
+              <tr><td class="num">30〜35未満</td><td>肥満2度</td></tr>
+              <tr><td class="num">35〜40未満</td><td>肥満3度（高度肥満）</td></tr>
+              <tr><td class="num">40以上</td><td>肥満4度（高度肥満）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul class="facts">
+          <li><b>肥満症</b>＝肥満(BMI25以上)＋11の健康障害（耐糖能障害・脂質異常症・高血圧・高尿酸血症痛風・冠動脈疾患・脳梗塞TIA・NAFLD・月経異常/女性不妊・睡眠時無呼吸症候群・運動器疾患ほか）のいずれか。または<b>内臓脂肪面積100cm²以上</b>（健康障害がなくても肥満症）。</li>
+          <li><b>標準体重</b>＝身長(m)²×22（BMI22基準、疾病が最も少ない体重）。</li>
+        </ul>
+      </div>
+
+      <div class="topic">
+        <h3>4大疾患 × 治療薬 × 運動処方の注意点</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>疾患</th><th>薬剤と影響</th><th>運動プログラムの注意</th></tr></thead>
+            <tbody>
+              <tr><td><strong>高血圧</strong></td><td>β遮断薬＝心拍数が上がらない／利尿薬＝脱水／Ca拮抗薬・ACE阻害薬・ARB＝血管拡張で血圧低下</td><td>RPEで管理、めまい・ふらつきは即中止、暑熱・脱水を避ける</td></tr>
+              <tr><td><strong>糖尿病</strong></td><td>インスリン・SU薬＝低血糖リスク／メトホルミン＝低血糖起こしにくい／SGLT2阻害薬＝脱水・ケトアシドーシス</td><td>運動前血糖チェック（70未満・250以上+ケトン陽性は運動禁止）、低血糖症状で即中止、足病変に注意</td></tr>
+              <tr><td><strong>虚血性心疾患</strong></td><td>β遮断薬＝心拍指標不可／硝酸薬＝血圧低下／<b>アスピリン（抗血小板薬）は運動生理に影響せず出血リスクのみ注意</b></td><td>負荷試験結果に基づく強度設定が必須、胸痛・息切れで即中止</td></tr>
+              <tr><td><strong>脂質異常症</strong></td><td>スタチン＝筋障害（筋痛・CK上昇・横紋筋融解症）</td><td>筋痛時は即中止、高強度筋トレは慎重に</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tip">
+          <span class="mark">よくある混同</span>
+          <p>アスピリンは「脂質異常症」の薬ではなく「虚血性心疾患」の薬。脂質異常症の運動上の注意点はスタチンによる<b>筋障害</b>である。</p>
+        </div>
+      </div>
+
+      <div class="topic">
+        <h3>運動誘発低血圧</h3>
+        <p>降圧薬（血圧↓）＋運動（血管拡張・副交感神経優位で血圧↓）の<b>相乗効果</b>で血圧が下がりすぎ、脳・心臓・腎臓が低灌流に陥る。めまい・失神・転倒・心筋虚血・急性腎障害のリスク。高齢者、糖尿病（自律神経障害）、心腎疾患、β遮断薬／利尿薬服用者、脱水しやすい人は特に注意。</p>
+      </div>
+
+      <div class="topic">
+        <h3>変形性関節症（進行しても運動療法は適応）</h3>
+        <ul class="facts">
+          <li>痛みの主因は炎症よりも<b>関節の支持性低下</b>。運動で筋力（支持性）が上がると痛みは軽減する。安静はむしろ悪化させる。</li>
+          <li>膝OA＝大腿四頭筋・中殿筋の強化が中心／股OA＝殿筋群の強化、深い屈曲を避ける／脊椎OA＝体幹筋強化・姿勢改善／指OA＝ヘバーデン結節(DIP)・ブシャール結節(PIP)、握力強化はしない。</li>
+          <li>膝OAの重症度は<b>Kellgren-Lawrence分類</b>（グレード0正常〜4末期、グレード2から診断）。グレード4でも運動療法は適応。</li>
+        </ul>
+      </div>
+
+      <div class="topic">
+        <h3>退行性疾患／変形性腰椎症と「神経症状」の定義</h3>
+        <ul class="facts">
+          <li><b>退行性疾患</b>＝加齢・長年の負荷による組織の摩耗・変性が原因の慢性疾患の総称（外傷・感染ではない）。変形性関節症、椎間板変性症、腱板断裂、脊柱管狭窄症など。</li>
+          <li>神経症状＝痺れ・痛み・<b>筋力低下（運動麻痺）</b>・反射低下が揃った状態。<b>痺れだけでは神経障害と診断しない。</b></li>
+          <li>「痺れ・痛み・筋力低下という神経症状の<b>ない</b>変形性腰椎症は運動療法の適応」＝これらの神経症状が無い場合を指す（筋力低下があるという意味ではない）。変形性腰椎症の痺れは筋緊張由来が多く、運動で改善しやすい。</li>
+        </ul>
+      </div>
+
+      <div class="topic">
+        <h3>ロコモ・サルコペニア・メタボ・フレイル</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th></th><th>ロコモ</th><th>サルコペニア</th><th>メタボ</th><th>フレイル</th></tr></thead>
+            <tbody>
+              <tr><td><strong>対象</strong></td><td>運動器全体（骨・関節・筋）</td><td>筋肉量・筋力</td><td>内臓脂肪＋危険因子</td><td>心身・社会の虚弱</td></tr>
+              <tr><td><strong>主因</strong></td><td>骨粗鬆症・変形性関節症など</td><td>加齢・低栄養・活動量低下</td><td>内臓脂肪蓄積・生活習慣</td><td>加齢・低栄養・社会的孤立</td></tr>
+              <tr><td><strong>評価</strong></td><td>ロコモ度テスト</td><td>AWGS2019（握力・歩行速度）</td><td>腹囲＋血圧/脂質/血糖</td><td>J-CHS基準</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>関係性：<b>サルコペニアはロコモの原因になり得て、ロコモはフレイルの一部を構成する</b>（サルコペニア⊂ロコモ⊂フレイル）。</p>
+      </div>
+
+      <div class="topic">
+        <h3>膝痛・腰痛の運動プログラム</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th></th><th>強化すべき筋</th><th>柔軟性を戻す筋</th></tr></thead>
+            <tbody>
+              <tr><td><strong>膝痛</strong></td><td>大腿四頭筋・中殿筋（外転筋）・内転筋</td><td>ハムストリングス・腸腰筋（股関節屈曲筋群）・下腿三頭筋</td></tr>
+              <tr><td><strong>腰痛</strong></td><td>体幹筋群（腹横筋・多裂筋・殿筋群）</td><td>腸腰筋・ハムストリングス・大殿筋（股関節伸展筋群）</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 行動科学・心理学 -->
+    <section class="chapter" id="behavior">
+      <div class="chapter-head"><span class="num">06</span><h2>行動科学・心理学</h2></div>
+      <p class="chapter-lede">アドヒアランス、依存悪化の4段階、行動変容の支援フレーム、ストレスの三層モデル。</p>
+
+      <div class="topic">
+        <h3>アドヒアランス（医療 vs 心理学）</h3>
+        <p>意味の核は共通で「専門家と<b>合意した</b>計画を守ること」（＝コンプライアンスより主体的）。医療では服薬・治療計画の遵守、心理学では行動変容計画への協働・継続、という<b>文脈の違い</b>があるだけ。</p>
+      </div>
+
+      <div class="topic">
+        <h3>スリップ → ラプス → リラプス → コラプス</h3>
+        <p>すべる（単発の過ち）→ つまずく（短期的な後退）→ 戻る（再発）→ 崩れる（機能崩壊）の順で深刻化。</p>
+        <ul class="facts">
+          <li><b>RE-</b>＝「再び・戻る」（例：Relapse＝再び＋つまずく＝再発）</li>
+          <li><b>CO-</b>＝「共に・全体で」（例：Collapse＝共に＋落ちる＝全体が崩れる＝崩壊）</li>
+        </ul>
+      </div>
+
+      <div class="topic">
+        <h3>行動変容支援の4フレーム</h3>
+        <div class="grid">
+          <div class="card">
+            <h5>5A（カウンセリング）</h5>
+            <p><b>Assess</b> 評価する</p>
+            <p><b>Advise</b> 助言する</p>
+            <p><b>Agree</b> 目標に合意する</p>
+            <p><b>Assist</b> 実行を支援する</p>
+            <p><b>Arrange</b> 継続支援を手配する</p>
+          </div>
+          <div class="card">
+            <h5>SMART（目標設定）</h5>
+            <p><b>S</b>pecific 具体的</p>
+            <p><b>M</b>easurable 測定可能</p>
+            <p><b>A</b>chievable 達成可能</p>
+            <p><b>R</b>elevant 関連性がある</p>
+            <p><b>T</b>ime-bound 期限がある</p>
+          </div>
+          <div class="card">
+            <h5>EAST（ナッジ）</h5>
+            <p><b>E</b>asy 簡単に</p>
+            <p><b>A</b>ttractive 魅力的に</p>
+            <p><b>S</b>ocial 社会的に</p>
+            <p><b>T</b>imely タイミングよく</p>
+          </div>
+          <div class="card">
+            <h5>MINDSPACE（意思決定9要因）</h5>
+            <p>Messenger・Incentives・Norms・Defaults・Salience・Priming・Affect・Commitments・Ego</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic">
+        <h3>ストレス学説の三層モデル</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>提唱者</th><th>視点</th><th>要点</th></tr></thead>
+            <tbody>
+              <tr><td><strong>セリエ</strong></td><td>生理学</td><td>ストレス＝身体の反応。GAS＝警告期→抵抗期→疲弊期</td></tr>
+              <tr><td><strong>ラザルス</strong></td><td>心理学</td><td>ストレス＝出来事の評価の仕方（一次評価・二次評価）とコーピングで決まる</td></tr>
+              <tr><td><strong>レピ</strong></td><td>社会学</td><td>ストレス＝仕事・家族・孤立などの社会環境が生む負荷</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="topic">
+        <h3>ストレス評価尺度</h3>
+        <ul class="facts">
+          <li><b>社会再適応尺度（SRRS）</b>：結婚・転職・死別など人生の大きな出来事（ライフイベント）の変化量を点数化。</li>
+          <li><b>K-6</b>：過去30日の不安・抑うつなど6項目で心理的苦痛を短時間スクリーニング。</li>
+          <li><b>デイリーハッスルズ</b>：通勤・家事など日常の小さなストレスの蓄積を測る。</li>
+          <li><b>職業性ストレス簡易調査票</b>：仕事の量・質・コントロール・人間関係・支援を含む職場ストレスの総合評価（厚労省のストレスチェック制度で使用）。</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 07 スポーツ栄養学 -->
+    <section class="chapter" id="nutrition">
+      <div class="chapter-head"><span class="num">07</span><h2>スポーツ栄養学</h2></div>
+      <p class="chapter-lede">食事アセスメントの種類、エネルギー代謝の3指標、食事摂取基準の用語、三大栄養素の消化吸収、ビタミンと鉄、栄養アセスメントの3分類。</p>
+
+      <div class="topic">
+        <h3>食事アセスメントの種類</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>方法</th><th>特徴</th></tr></thead>
+            <tbody>
+              <tr><td><strong>陰膳法</strong></td><td>同じ食事を化学分析。最も正確だが負担が非常に大きい</td></tr>
+              <tr><td><strong>食事記録法</strong></td><td>その都度記録。精度は高いが負担が大きい</td></tr>
+              <tr><td><strong>24時間思い出し法</strong></td><td>前日の食事を面接で聴取。負担は小さいが記憶誤差がある</td></tr>
+              <tr><td><strong>食物摂取頻度調査（FFQ）</strong></td><td>頻度を回答。習慣把握と大規模調査に向くが絶対量は不向き</td></tr>
+              <tr><td><strong>食事歴法</strong></td><td>FFQ＋聞き取り。調理・調味の情報も反映できるが時間がかかる</td></tr>
+              <tr><td><strong>写真撮影法</strong></td><td>簡便だが味付け・詳細は不明</td></tr>
+              <tr><td><strong>食事バランスガイド／料理調査法</strong></td><td>視覚的で誰でも使えるが、量の過不足はBMI等で別途補う必要</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="topic">
+        <h3>エネルギー代謝の3指標</h3>
+        <ul class="facts">
+          <li><b>基礎代謝量（BMR）</b>＝生命維持の最小エネルギー。総消費の約60%。筋肉量が多いほど高い。</li>
+          <li><b>身体活動量（PA）</b>＝日常生活・運動で消費するエネルギー。総消費の約20〜30%。</li>
+          <li><b>身体活動レベル（PAL）＝PA÷BMR</b>。レベルⅠ(低い)1.40／Ⅱ(ふつう)1.75／Ⅲ(高い)2.00。<b>総エネルギー必要量＝BMR×PAL</b>。</li>
+        </ul>
+      </div>
+
+      <div class="topic">
+        <h3>食事摂取基準の用語</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>用語</th><th>正式名称</th><th>意味</th></tr></thead>
+            <tbody>
+              <tr><td><strong>EER</strong></td><td>推定エネルギー必要量</td><td>個人の体重維持に必要なエネルギー＝BMR×PAL</td></tr>
+              <tr><td><strong>EAR</strong></td><td>平均必要量</td><td>集団の50%が必要量を満たす摂取量（個人評価には不向き）</td></tr>
+              <tr><td><strong>RDA</strong></td><td>推奨量</td><td>EAR＋標準偏差2つ分（ほぼ全員が充足する量）</td></tr>
+              <tr><td><strong>AI</strong></td><td>目安量</td><td>科学的根拠が不十分でRDAが設定できない時の目安</td></tr>
+              <tr><td><strong>DG</strong></td><td>目標量</td><td>生活習慣病予防のための摂取量の範囲（食塩・脂質など）</td></tr>
+              <tr><td><strong>UL</strong></td><td>耐容上限量</td><td>健康被害がほぼ生じない摂取量の上限（過剰摂取の目安）</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="topic">
+        <h3>三大栄養素の消化吸収</h3>
+        <ul class="facts">
+          <li><b>糖質</b>：唾液アミラーゼ→膵アミラーゼ→二糖分解酵素（マルターゼ／スクラーゼ／<b>ラクターゼ</b>）→単糖（グルコース・ガラクトースはSGLT1、フルクトースはGLUT5）→門脈→肝臓。乳糖不耐症はラクターゼ不足が原因。</li>
+          <li><b>脂質</b>：胆汁酸が脂肪を乳化→膵リパーゼがトリグリセリドを脂肪酸＋モノグリセリドに分解→ミセル形成→吸収後カイロミクロンに再合成→<b>リンパ管</b>へ（糖質・タンパク質は門脈）。</li>
+          <li><b>タンパク質</b>：胃のペプシンでポリペプチドに→膵酵素（トリプシン・キモトリプシン等）でオリゴペプチドに→腸酵素（アミノペプチダーゼ等）でアミノ酸に→アミノ酸・ジペプチド(PEPT1)で吸収→門脈→肝臓。</li>
+        </ul>
+      </div>
+
+      <div class="topic">
+        <h3>ビタミン</h3>
+        <p><b>水溶性（B群・C）</b>は欠乏しやすい／<b>脂溶性（A・D・E・K）</b>は体に蓄積し過剰に注意。</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>ビタミン</th><th>主な働き</th><th>欠乏症</th></tr></thead>
+            <tbody>
+              <tr><td>B1</td><td>糖質代謝</td><td>脚気</td></tr>
+              <tr><td>B2</td><td>脂質代謝</td><td>口角炎</td></tr>
+              <tr><td>ナイアシン(B3)</td><td>エネルギー代謝(NAD)</td><td>ペラグラ</td></tr>
+              <tr><td>B6</td><td>アミノ酸代謝</td><td>皮膚炎・けいれん</td></tr>
+              <tr><td>B12・葉酸</td><td>赤血球生成・DNA合成</td><td>巨赤芽球性貧血</td></tr>
+              <tr><td>C</td><td>コラーゲン合成・抗酸化</td><td>壊血病</td></tr>
+              <tr><td>A</td><td>視覚・皮膚粘膜</td><td>夜盲症</td></tr>
+              <tr><td>D</td><td>カルシウム吸収・骨形成</td><td>くる病／骨軟化症</td></tr>
+              <tr><td>E</td><td>抗酸化</td><td>まれ</td></tr>
+              <tr><td>K</td><td>血液凝固・骨形成</td><td>出血傾向</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tip">
+          <span class="mark">コバルト</span>
+          <p><b>ビタミンB12（コバラミン）の中心金属</b>。コバルト単体の摂取基準はなく、B12として摂取することで初めて働く。</p>
+        </div>
+      </div>
+
+      <div class="topic">
+        <h3>鉄欠乏</h3>
+        <ul class="facts">
+          <li><b>ヘム鉄</b>（肉・魚、吸収率10〜20%） vs <b>非ヘム鉄</b>（野菜・豆、吸収率2〜5%、ビタミンCで吸収↑、フィチン酸・タンニンで吸収↓）。</li>
+          <li>検査値で<b>最も早く低下するのはフェリチン（貯蔵鉄）</b>。続いてヘモグロビン↓、血清鉄↓、TIBC↑。</li>
+          <li>原因：月経、成長期、妊娠・授乳、ランナー（足裏衝撃による溶血）、偏食、胃切除（胃酸低下で吸収↓）。</li>
+        </ul>
+      </div>
+
+      <div class="topic">
+        <h3>低栄養とアルブミン</h3>
+        <ul class="facts">
+          <li>低栄養の指標：<b>6ヶ月で体重5%以上の減少</b>が最重要、加えてBMI・血清アルブミン（3.5g/dL未満）・握力・歩行速度の低下。</li>
+          <li>食事指導＝タンパク質1.0〜1.2g/kg・エネルギーを増やす。運動指導＝<b>レジスタンス運動を優先</b>し有酸素は控えめ、運動後30分以内のタンパク質摂取。</li>
+          <li>アルブミンは「良い・悪い」ではなく適正かどうかが本質。<b>低い＝低栄養の可能性、高い＝主に脱水</b>（肥満症とは無関係。肥満症の診断はBMI＋健康障害で行う）。<b>炎症でも低下する</b>ため栄養状態だけの指標ではない点に注意。</li>
+        </ul>
+      </div>
+
+      <div class="topic">
+        <h3>栄養アセスメントの3分類</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>分類</th><th>見るもの</th><th>代表指標</th></tr></thead>
+            <tbody>
+              <tr><td><strong>静的</strong></td><td>今の状態</td><td>身体計測(BMI等)、血液検査(アルブミン等)</td></tr>
+              <tr><td><strong>動的</strong></td><td>栄養素の利用能力</td><td>負荷試験、酵素活性の測定</td></tr>
+              <tr><td><strong>予後判定</strong></td><td>将来のリスク</td><td>MNA、SGA、PNI、CONUT、GNRI</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>健康運動指導士 試験対策ノート — これまでの質疑応答をもとに5分野で再構成</footer>
+</div>
